@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
-# HFOS - Hackerfleet Operating System
-# ===================================
+# Isomer Application Framework
+# ============================
 # Copyright (C) 2011-2018 Heiko 'riot' Weinen <riot@c-base.org> and others.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -23,26 +23,26 @@ __license__ = "AGPLv3"
 
 from setuptools import setup, find_packages
 
-setup(name="hfos-camera",
+setup(name="isomer-camera",
       version="0.0.1",
-      description="hfos-camera",
+      description="isomer-camera",
 
-      author="Hackerfleet Community",
+      author="Isomer Community",
       author_email="riot@c-base.org",
-      url="https://github.com/hackerfleet/hfos-camera",
+      url="https://github.com/isomeric/isomer-camera",
       license="GNU Affero General Public License v3",
       packages=find_packages(),
-      long_description="""HFOS - Camera
-=============
+      long_description="""Isomer - Camera
+===============
 
 A modern, opensource approach to camera management.
 
-This software package is a plugin module for HFOS.
+This software package is a plugin module for Isomer.
 """,
       dependency_links=[],
-      install_requires=['hfos>=1.2.0'],
+      install_requires=['isomer>=1.0.0'],
       entry_points="""[isomer.components]
-    camera=hfos.camera.manager:Manager
+    camera=isomer.camera.manager:Manager
 [isomer.schemata]
     """,
       test_suite="tests.main.main",

@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
-# HFOS - Hackerfleet Operating System
-# ===================================
+# Isomer Application Framework
+# ============================
 # Copyright (C) 2011-2018 Heiko 'riot' Weinen <riot@c-base.org> and others.
 #
 # This program is free software: you can redistribute it and/or modify
@@ -115,7 +115,7 @@ class Manager(ConfigurableComponent):
                     if success:
 
                         cam_packet_header = {
-                            'component': 'hfos.camera.manager' + str(
+                            'component': 'isomer.camera.manager' + str(
                                 cam_id),
                             'action': 'update'
                         }
@@ -156,7 +156,7 @@ class Manager(ConfigurableComponent):
         try:
             for recipient in self._subscribers[camera_uuid]:
                 self.fireEvent(send(recipient, camera_packet, raw=True),
-                               "hfosweb")
+                               "isomer-web")
         except Exception as e:
             self.log("Failed broadcast: ", e, type(e), lvl=error)
 
@@ -192,20 +192,20 @@ class Manager(ConfigurableComponent):
         client_uuid = event.clientuuid
         self._unsubscribe(client_uuid)
 
-    @handler(camera_list, channel='hfosweb')
+    @handler(camera_list, channel='isomer-web')
     def camera_list(self, event):
         try:
             client_uuid = event.client.uuid
             db_list = self._generate_camera_list()
             self.fireEvent(send(client_uuid, {
-                'component': 'hfos.camera.manager',
+                'component': 'isomer.camera.manager',
                 'action': 'list',
                 'data': db_list
-            }), "hfosweb")
+            }), "isomer-web")
         except Exception as e:
             self.log("Listing error: ", e, type(e), lvl=error)
 
-    @handler(camera_subscribe, channel='hfosweb')
+    @handler(camera_subscribe, channel='isomer-web')
     def camera_subscribe(self, event):
         # TODO: Verify everything and send response
         try:
@@ -221,7 +221,7 @@ class Manager(ConfigurableComponent):
         except Exception as e:
             self.log("Subscription Error:", e, type(e), lvl=error)
 
-    @handler(camera_unsubscribe, channel='hfosweb')
+    @handler(camera_unsubscribe, channel='isomer-web')
     def camera_unsubscribe(self, event):
         try:
             client_uuid = event.client.uuid
